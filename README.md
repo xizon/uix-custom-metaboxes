@@ -1,4 +1,4 @@
-# Uix Custom Custom Meta Boxes
+# Uix Custom Meta Boxes
 
 Provides a compatible solution for some personalized themes that require custom meta boxes for WordPress.
 
