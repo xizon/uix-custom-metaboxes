@@ -39,7 +39,15 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 		*/
 		public static $all_config = array();
 
+	
+        /*
+         * Callback the directory URL
+         *
+         *
+         */
+        private static $directory = '';
 
+     
 
 		/**
 		* Initialize the custom meta box
@@ -71,20 +79,56 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 		}
 
+
         
+        /*
+         * The function finds the position of the first occurrence of a string inside another string.
+         *
+         * As strpos may return either FALSE (substring absent) or 0 (substring at start of string), strict versus loose equivalency operators must be used very carefully.
+         *
+         */
+        public static function inc_str( $str, $incstr ) {
 
-		/**
-		* The TinyMCE "syntax-highlight-code" and "code" buttons is not included with WP by default
-		*
-		*/    
-//        public static function mce_external_plugins($plugins) {   
-//
-//            $plugins['code'] = UixShortcodes::plug_directory() .'includes/admin/uix-custom-metaboxes/editor/plugins/syntax-highlight-code/prism.js';
-//            return $plugins;
-//        }
-//        add_filter('mce_external_plugins', 'my_mce_external_plugins');
-//
+            $incstr = str_replace( '(', '\(',
+                      str_replace( ')', '\)',
+                      str_replace( '|', '\|',
+                      str_replace( '*', '\*',
+                      str_replace( '+', '\+',
+                      str_replace( '.', '\.',
+                      str_replace( '[', '\[',
+                      str_replace( ']', '\]',
+                      str_replace( '?', '\?',
+                      str_replace( '/', '\/',
+                      str_replace( '^', '\^',
+                      str_replace( '{', '\{',
+                      str_replace( '}', '\}',	
+                      str_replace( '$', '\$',
+                      str_replace( '\\', '\\\\',
+                      $incstr 
+                      )))))))))))))));
 
+            if ( !empty( $incstr ) ) {
+                if ( preg_match( '/'.$incstr.'/', $str ) ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+
+
+        }
+ 
+        /**
+         * Filters content and keeps only allowable HTML elements.
+         *
+         */
+        public static function kses( $html ){
+
+            return wp_kses( $html, wp_kses_allowed_html( 'post' ) );
+
+        }
 
 		
 		/*
@@ -100,35 +144,35 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 			  if ( $currentScreen->base === "post" || //page,post,custom post type
 				   $currentScreen->base === "widgets" || 
 				   $currentScreen->base === "customize" || 
-				   UixShortcodes::inc_str( $currentScreen->base, '_page_' ) 
+				   self::inc_str( $currentScreen->base, '_page_' ) 
 				 ) 
 			  {
     
 				
-					wp_enqueue_style( 'uix-custom-metaboxes', UixShortcodes::plug_directory() .'includes/admin/uix-custom-metaboxes/css/uix-custom-metaboxes.min.css', false, self::$ver, 'all' );
+					wp_enqueue_style( 'uix-custom-metaboxes', self::$directory .'uix-custom-metaboxes/css/uix-custom-metaboxes.min.css', false, self::$ver, 'all' );
 					//RTL		
 					if ( is_rtl() ) {
-						wp_enqueue_style( 'uix-custom-metaboxes-rtl', UixShortcodes::plug_directory() .'includes/admin/uix-custom-metaboxes/css/uix-custom-metaboxes.min-rtl.css', false, self::$ver, 'all' );
+						wp_enqueue_style( 'uix-custom-metaboxes-rtl', self::$directory .'uix-custom-metaboxes/css/uix-custom-metaboxes.min-rtl.css', false, self::$ver, 'all' );
 					} 
 				  
 				  
-					wp_enqueue_script( 'uix-custom-metaboxes', UixShortcodes::plug_directory() .'includes/admin/uix-custom-metaboxes/js/uix-custom-metaboxes.min.js', array( 'jquery' ), self::$ver, true );
+					wp_enqueue_script( 'uix-custom-metaboxes', self::$directory .'uix-custom-metaboxes/js/uix-custom-metaboxes.min.js', array( 'jquery' ), self::$ver, true );
                   
                   
 					wp_localize_script( 'uix-custom-metaboxes',  'uix_custom_metaboxes_lang', array( 
-						'ed_url'                  => UixShortcodes::plug_directory() .'includes/admin/uix-custom-metaboxes/',
-						'ed_media_title'          => __( 'Select Files', 'uix-shortcodes' ),
-						'ed_media_text'           => __( 'Insert', 'uix-shortcodes' ),				
-						'ed_image'                => __( 'Insert Image', 'uix-shortcodes' ),
-						'ed_unlink_title'         => __( 'Remove link', 'uix-shortcodes' ),
-						'ed_link_title'           => __( 'Insert/Edit link', 'uix-shortcodes' ),
-						'ed_link_field_url'       => __( 'URL', 'uix-shortcodes' ),
-						'ed_link_field_text'      => __( 'Link Text', 'uix-shortcodes' ),
-						'ed_link_field_win'       => __( 'Open link in a new tab', 'uix-shortcodes' ),
-						'ed_hcode_title'          => __( 'Syntax Highlight Code', 'uix-shortcodes' ),
-						'ed_hcode_field_label'    => __( 'Language', 'uix-shortcodes' ),
-                        'select_empty_text'       => __( '-', 'uix-shortcodes' ),
-                        'delete_confirm_text'     => __( 'Are you sure you want to delete?', 'uix-shortcodes' ),
+						'ed_url'                  => self::$directory .'uix-custom-metaboxes/',
+						'ed_media_title'          => __( 'Select Files', 'your-theme' ),
+						'ed_media_text'           => __( 'Insert', 'your-theme' ),				
+						'ed_image'                => __( 'Insert Image', 'your-theme' ),
+						'ed_unlink_title'         => __( 'Remove link', 'your-theme' ),
+						'ed_link_title'           => __( 'Insert/Edit link', 'your-theme' ),
+						'ed_link_field_url'       => __( 'URL', 'your-theme' ),
+						'ed_link_field_text'      => __( 'Link Text', 'your-theme' ),
+						'ed_link_field_win'       => __( 'Open link in a new tab', 'your-theme' ),
+						'ed_hcode_title'          => __( 'Syntax Highlight Code', 'your-theme' ),
+						'ed_hcode_field_label'    => __( 'Language', 'your-theme' ),
+                        'select_empty_text'       => __( '-', 'your-theme' ),
+                        'delete_confirm_text'     => __( 'Are you sure you want to delete?', 'your-theme' ),
                         
 					 ) );	
 				 
@@ -168,8 +212,8 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 				foreach ( $args as $v ) {
 
 
-					$id        = ( isset( $v[ 'config' ][ 'id' ] ) ) ? esc_attr( $v[ 'config' ][ 'id' ] ) : 'uix_shortcodes_custom_meta-default';
-					$title     = ( isset( $v[ 'config' ][ 'title' ] ) ) ? esc_html( $v[ 'config' ][ 'title' ] ) : esc_html__( 'Group Title', 'uix-shortcodes' );
+					$id        = ( isset( $v[ 'config' ][ 'id' ] ) ) ? esc_attr( $v[ 'config' ][ 'id' ] ) : 'uix_custom_meta-default';
+					$title     = ( isset( $v[ 'config' ][ 'title' ] ) ) ? esc_html( $v[ 'config' ][ 'title' ] ) : esc_html__( 'Group Title', 'your-theme' );
 					$screen    = ( isset( $v[ 'config' ][ 'screen' ] ) ) ? esc_attr( $v[ 'config' ][ 'screen' ] ) : 'page';
 					$context   = ( isset( $v[ 'config' ][ 'context' ] ) ) ? esc_attr( $v[ 'config' ][ 'context' ] ) : 'normal';
 					$priority  = ( isset( $v[ 'config' ][ 'priority' ] ) ) ? esc_attr( $v[ 'config' ][ 'priority' ] ) : 'high';
@@ -384,7 +428,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 							$type          = $v[ 'type' ];
 							$id            = esc_attr( $v[ 'id' ] );
-							$title         = ( isset( $v[ 'title' ] ) ) ? $v[ 'title' ] : esc_html__( 'Field Title', 'uix-shortcodes' );
+							$title         = ( isset( $v[ 'title' ] ) ) ? $v[ 'title' ] : esc_html__( 'Field Title', 'your-theme' );
 							$placeholder   = ( isset( $v[ 'placeholder' ] ) ) ? $v[ 'placeholder' ] : '';
 							$options       = ( isset( $v[ 'options' ] ) ) ? $v[ 'options' ] : '';
 							$desc          = ( isset( $v[ 'desc' ] ) ) ? $v[ 'desc' ] : '';
@@ -710,7 +754,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 		* Field Type: Editor
 		*
 		* @print: 
-		* echo UixShortcodes::kses( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_appear_3', true ) );
+		* echo self::kses( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_appear_3', true ) );
 	    *
 		*/
 		public static function addfield_editor( $id, $title, $desc, $default, $options = '', $placeholder = '', $desc_primary = '', $enable_table = false ) {
@@ -718,9 +762,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -761,9 +805,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -779,7 +823,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 					   <textarea placeholder="<?php echo esc_attr( $placeholder ); ?>" rows="<?php echo absint( $rows ); ?>" cols="40" name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>"><?php echo esc_textarea( $default ); ?></textarea>
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 
             <?php if ( $enable_table ) : ?>  
@@ -798,9 +842,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -808,7 +852,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
                     
 					   <input placeholder="<?php echo esc_attr( $placeholder ); ?>" type="text" class="uix-cmb__normal-text" value="<?php echo esc_attr( $default ); ?>" name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>">
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?> 
@@ -827,9 +871,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -847,7 +891,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 				   
 					   <input data-format="<?php echo esc_attr( $format ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" type="text" class="uix-cmb__short-text uix-cmb__date-selector" value="<?php echo esc_attr( $default ); ?>" name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>">
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<span class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></span>
+							<span class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></span>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?>  
@@ -869,9 +913,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -880,7 +924,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
                     
 					   <input placeholder="<?php echo esc_attr( $placeholder ); ?>" type="text" class="uix-cmb__normal-text" value="<?php echo esc_url( $default ); ?>" name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>">
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?>   
@@ -900,9 +944,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -916,7 +960,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						?>					   
 					   
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?>   
@@ -938,9 +982,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -953,7 +997,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						?>	
 					   <input placeholder="<?php echo esc_attr( $placeholder ); ?>" type="text" class="uix-cmb__short-text" value="<?php echo ( empty( $default ) ) ? 0 : floatval( $default ); ?>" name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>">
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<span class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></span>
+							<span class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></span>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?>   
@@ -974,9 +1018,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -996,7 +1040,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						
 				   
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?>   
@@ -1017,9 +1061,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -1027,7 +1071,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
                     
 					   <input placeholder="<?php echo esc_attr( $placeholder ); ?>" type="text" class="uix-cmb__color-selector" value="<?php echo esc_attr( $default ); ?>" name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>">
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?>  
@@ -1051,9 +1095,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -1065,7 +1109,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						<label>
 							<input name="<?php echo esc_attr( $id ); ?>" type="checkbox" value="1" <?php checked( $default, 1 ); ?>>
 							<?php if ( !empty ( $desc_primary ) ) { ?>
-								<span class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></span>
+								<span class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></span>
 							<?php } ?>
 							
 						</label>
@@ -1103,9 +1147,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -1140,7 +1184,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 									
 									<label class="<?php if ( $br ) { echo 'uix-cmb__label'; } else { echo ''; }; ?>">
 										<input name="<?php echo esc_attr( $id ); ?>[]" type="checkbox" value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?>>
-										<?php echo UixShortcodes::kses( $value ); ?>
+										<?php echo self::kses( $value ); ?>
 									</label>
 					
 									<?php
@@ -1155,7 +1199,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 					</div>
 					
 					<?php if ( !empty ( $desc_primary ) ) { ?>
-						<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+						<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 					<?php } ?>
 		
 
@@ -1177,9 +1221,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -1214,7 +1258,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 									?>
 									
-									<option value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?> ><?php echo UixShortcodes::kses( $value ); ?></option>
+									<option value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?> ><?php echo self::kses( $value ); ?></option>
 					
 									<?php
 									$i++;
@@ -1227,7 +1271,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 					
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?>   
@@ -1250,9 +1294,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             <?php if ( $enable_table ) : ?>
 			<tr>
 				<th class="uix-cmb__title">
-					<label><?php echo UixShortcodes::kses( $title ); ?></label>
+					<label><?php echo self::kses( $title ); ?></label>
 					<?php if ( !empty ( $desc ) ) { ?>
-					    <p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+					    <p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 					<?php } ?>
 				</th>
 				<td>
@@ -1315,7 +1359,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 								
 								
 								<?php if ( $radio_type == 'normal' ) { ?>
-									<label data-value="<?php echo esc_attr( $key ); ?>" data-toggle-id="<?php echo esc_attr( $toggle_id ); ?>" class="<?php if ( $br ) { echo 'uix-cmb__label'; } else { echo ''; }; ?> uix-cmb__radio-text uix-cmb__toggle-selector <?php if ( $default == esc_attr( $key ) || empty( $default ) ) { echo 'active'; } else { echo ''; }; ?>"><input type="radio" name="<?php echo esc_attr( $id ); ?>_r" value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?>/><?php echo UixShortcodes::kses( $value ); ?></label>
+									<label data-value="<?php echo esc_attr( $key ); ?>" data-toggle-id="<?php echo esc_attr( $toggle_id ); ?>" class="<?php if ( $br ) { echo 'uix-cmb__label'; } else { echo ''; }; ?> uix-cmb__radio-text uix-cmb__toggle-selector <?php if ( $default == esc_attr( $key ) || empty( $default ) ) { echo 'active'; } else { echo ''; }; ?>"><input type="radio" name="<?php echo esc_attr( $id ); ?>_r" value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?>/><?php echo self::kses( $value ); ?></label>
 								<?php } ?>
 									
 								<?php if ( $radio_type == 'image' ) { ?>
@@ -1364,7 +1408,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 									$toggle_ipt_type          = $v[ 'type' ];
                                     
                                     //---
-                                    $toggle_ipt_title         = ( isset( $v[ 'title' ] ) ) ? $v[ 'title' ] : esc_html__( 'Field Title', 'uix-shortcodes' );
+                                    $toggle_ipt_title         = ( isset( $v[ 'title' ] ) ) ? $v[ 'title' ] : esc_html__( 'Field Title', 'your-theme' );
                                     $toggle_ipt_placeholder   = ( isset( $v[ 'placeholder' ] ) ) ? $v[ 'placeholder' ] : '';
                                     $toggle_ipt_options       = ( isset( $v[ 'options' ] ) ) ? $v[ 'options' ] : '';
                                     $toggle_ipt_desc          = ( isset( $v[ 'desc' ] ) ) ? $v[ 'desc' ] : '';
@@ -1481,7 +1525,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 					
 						<?php if ( !empty ( $desc_primary ) ) { ?>
-							<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+							<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 						<?php } ?>
 			
             <?php if ( $enable_table ) : ?> 
@@ -1509,7 +1553,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
                     <li>
                         <strong><?php echo esc_html( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'name' ] ) ); ?></strong>
                         <p>
-                            <?php echo UixShortcodes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
+                            <?php echo self::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
                         </p>
                     </li>
                 <?php
@@ -1523,8 +1567,8 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 		public static function addfield_custom_attrs( $id, $title, $desc, $default, $options = '', $placeholder = '', $desc_primary = '', $enable_table = false ) {
 			
 			$project_custom_attrs = json_decode( $default, true );
-			$label_title          = esc_html__( 'Title', 'uix-shortcodes' );
-			$label_value          = esc_html__( 'Value', 'uix-shortcodes' );
+			$label_title          = esc_html__( 'Title', 'your-theme' );
+			$label_value          = esc_html__( 'Value', 'your-theme' );
 
             
             //---
@@ -1549,7 +1593,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						<p class="uix-cmb__description">
 							'.esc_html( $label_value ).'
 						</p>
-						<input class="uix-cmb__text--medium" name="'.esc_attr( $id ).'_attrs_value[]" value="{value}"><a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__removebtn" title="'.esc_attr__( 'Remove field', 'uix-shortcodes' ).'"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-trash" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M12 4h3c.6 0 1 .4 1 1v1H3V5c0-.6.5-1 1-1h3c.2-1.1 1.3-2 2.5-2s2.3.9 2.5 2zM8 4h3c-.2-.6-.9-1-1.5-1S8.2 3.4 8 4zM4 7h11l-.9 10.1c0 .5-.5.9-1 .9H5.9c-.5 0-.9-.4-1-.9L4 7z"></path></svg></a>
+						<input class="uix-cmb__text--medium" name="'.esc_attr( $id ).'_attrs_value[]" value="{value}"><a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__removebtn" title="'.esc_attr__( 'Remove field', 'your-theme' ).'"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-trash" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M12 4h3c.6 0 1 .4 1 1v1H3V5c0-.6.5-1 1-1h3c.2-1.1 1.3-2 2.5-2s2.3.9 2.5 2zM8 4h3c-.2-.6-.9-1-1.5-1S8.2 3.4 8 4zM4 7h11l-.9 10.1c0 .5-.5.9-1 .9H5.9c-.5 0-.9-.4-1-.9L4 7z"></path></svg></a>
 					</label>
 				</div>
 			';
@@ -1579,9 +1623,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 							<tr>
 								<th class="uix-cmb__title">
-									<label><?php echo UixShortcodes::kses( $title ); ?></label>
+									<label><?php echo self::kses( $title ); ?></label>
 									<?php if ( !empty ( $desc ) ) { ?>
-										<p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+										<p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 									<?php } ?>
 								</th>
 								<td>
@@ -1604,7 +1648,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 									<div id="<?php echo esc_attr( $id ); ?>_append"></div> 
                                     
                                     <div class="uix-cmb__custom-attributes-field__addbtn__wrapper">
-                                        <a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__addbtn"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-insert" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg><?php esc_html_e( 'Add New', 'uix-shortcodes' ); ?></a>
+                                        <a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__addbtn"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-insert" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg><?php esc_html_e( 'Add New', 'your-theme' ); ?></a>
                                     </div>
                                     
                                     
@@ -1619,7 +1663,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 					<!-- End Fields -->
 				
 					<?php if ( !empty ( $desc_primary ) ) { ?>
-						<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+						<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 					<?php } ?>
 				
 				
@@ -1654,9 +1698,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
                         <section class="slide <?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'classname' ] ) ); ?>" id="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'id' ] ) ); ?>" data-level="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'level' ] ) ); ?>">
 
                             <h3><?php echo esc_html( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'name' ] ) ); ?></h3>
-                            <?php echo UixShortcodes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'subtitle' ] ) ); ?>
+                            <?php echo self::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'subtitle' ] ) ); ?>
                             <hr>
-                            <?php echo UixShortcodes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
+                            <?php echo self::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
 
 
                         <?php   
@@ -1670,9 +1714,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
                                 <div class="slide slide-child <?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'classname' ] ) ); ?>" id="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'id' ] ) ); ?>" data-level="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'level' ] ) ); ?>">
 
                                     <h3><?php echo esc_html( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'name' ] ) ); ?></h3>
-                                    <?php echo UixShortcodes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'subtitle' ] ) ); ?>
+                                    <?php echo self::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'subtitle' ] ) ); ?>
                                     <hr>
-                                    <?php echo UixShortcodes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
+                                    <?php echo self::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
 
                                 </div>  
 
@@ -1704,12 +1748,12 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
      
             //---
 			$project_custom_attrs = json_decode( $default, true );
-			$label_title          = esc_html__( 'Title', 'uix-shortcodes' );
-			$label_value          = esc_html__( 'Value', 'uix-shortcodes' );
-            $label_subtitle       = esc_html__( 'Subtitle', 'uix-shortcodes' );
-            $label_id             = esc_html__( 'ID', 'uix-shortcodes' );
-            $label_level          = esc_html__( 'Level', 'uix-shortcodes' );
-            $label_classname      = esc_html__( 'Class Name', 'uix-shortcodes' );
+			$label_title          = esc_html__( 'Title', 'your-theme' );
+			$label_value          = esc_html__( 'Value', 'your-theme' );
+            $label_subtitle       = esc_html__( 'Subtitle', 'your-theme' );
+            $label_id             = esc_html__( 'ID', 'your-theme' );
+            $label_level          = esc_html__( 'Level', 'your-theme' );
+            $label_classname      = esc_html__( 'Class Name', 'your-theme' );
        
           
             //editor options
@@ -1737,7 +1781,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
             //Do not use "name" on <select>, because js may cause data to be empty and cannot be saved.
             $checked = '';
             $level_res = '<select class="uix-cmb__text--fullwidth uix-cmb__text--div--toggle__sel">';
-            $level_res.= '<option value="">'.esc_html__( '-', 'uix-shortcodes' ).'</option>';
+            $level_res.= '<option value="">'.esc_html__( '-', 'your-theme' ).'</option>';
        
             if ( is_array( $project_custom_attrs ) && sizeof( $project_custom_attrs ) > 0 ) {
 
@@ -1779,7 +1823,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 				<div class="uix-cmb__text--div uix-cmb__text--div--toggle {childstyle}">
                     <a href="javascript:void(0);" class="uix-cmb__text--div--toggle__trigger"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M3 17v4h4l11-11-4-4L3 17zm3 2H5v-1l9-9 1 1-9 9zM21 6l-3-3h-1l-2 2 4 4 2-2V6z"></path></svg><span>{name}</span></a>
                     
-                   <a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__removebtn" title="'.esc_attr__( 'Remove field', 'uix-shortcodes' ).'"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-trash" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M12 4h3c.6 0 1 .4 1 1v1H3V5c0-.6.5-1 1-1h3c.2-1.1 1.3-2 2.5-2s2.3.9 2.5 2zM8 4h3c-.2-.6-.9-1-1.5-1S8.2 3.4 8 4zM4 7h11l-.9 10.1c0 .5-.5.9-1 .9H5.9c-.5 0-.9-.4-1-.9L4 7z"></path></svg></a>
+                   <a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__removebtn" title="'.esc_attr__( 'Remove field', 'your-theme' ).'"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-trash" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M12 4h3c.6 0 1 .4 1 1v1H3V5c0-.6.5-1 1-1h3c.2-1.1 1.3-2 2.5-2s2.3.9 2.5 2zM8 4h3c-.2-.6-.9-1-1.5-1S8.2 3.4 8 4zM4 7h11l-.9 10.1c0 .5-.5.9-1 .9H5.9c-.5 0-.9-.4-1-.9L4 7z"></path></svg></a>
                     
                     <div class="uix-cmb__text--div--toggle__div">
                     
@@ -1855,7 +1899,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 			';
 			
 	
-			$temp_attr = str_replace( '{name}', esc_html__( 'Untitled', 'uix-shortcodes' ), 
+			$temp_attr = str_replace( '{name}', esc_html__( 'Untitled', 'your-theme' ), 
 						 str_replace( '{value}', '',  
                          str_replace( '{level}', '',
                          str_replace( '{subtitle}', '',
@@ -1882,9 +1926,9 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
 							<tr>
 								<th class="uix-cmb__title">
-									<label><?php echo UixShortcodes::kses( $title ); ?></label>
+									<label><?php echo self::kses( $title ); ?></label>
 									<?php if ( !empty ( $desc ) ) { ?>
-										<p class="uix-cmb__title_desc"><?php echo UixShortcodes::kses( $desc ); ?></p>
+										<p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 									<?php } ?>
 								</th>
 								<td>
@@ -1945,7 +1989,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 									<div id="<?php echo esc_attr( $id ); ?>_append"></div>   
                                     
                                     <div class="uix-cmb__custom-attributes-field__addbtn__wrapper">
-                                         <a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__addbtn"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-insert" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg><?php esc_html_e( 'Add New', 'uix-shortcodes' ); ?></a>
+                                         <a href="javascript:void(0);" class="uix-cmb__custom-attributes-field__addbtn"><svg aria-hidden="true" role="img" focusable="false" class="dashicon dashicons-insert" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10 1c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7 7 3.1 7 7-3.1 7-7 7zm1-11H9v3H6v2h3v3h2v-3h3V9h-3V6z"></path></svg><?php esc_html_e( 'Add New', 'your-theme' ); ?></a>
                                     </div>
                                     
                                     
@@ -1960,7 +2004,7 @@ if ( !class_exists( 'Uix_Custom_Metaboxes' ) ) {
 					<!-- End Fields -->
 				
 					<?php if ( !empty ( $desc_primary ) ) { ?>
-						<p class="uix-cmb__description"><?php echo UixShortcodes::kses( $desc_primary ); ?></p>
+						<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 					<?php } ?>
 				
 				

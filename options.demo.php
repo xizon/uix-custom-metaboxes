@@ -242,7 +242,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						'id'            =>  'cus_page_ex_demoname_appear_4',
 						'type'          =>  'date',
 						'title'         =>  esc_html__( 'Date', 'your-theme' ),
-						'desc_primary'  =>  UixShortcodes::kses( __( 'Enter date of your projects. <strong>(optional)</strong>', 'your-theme' ) ),
+						'desc_primary'  =>  Uix_Custom_Metaboxes::kses( __( 'Enter date of your projects. <strong>(optional)</strong>', 'your-theme' ) ),
 						'options'       =>  array( 
 											'format'  => 'MM dd, yy',
 										  )

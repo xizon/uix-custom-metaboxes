@@ -344,11 +344,17 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 $demoname = get_post_meta( get_the_ID(), 'cus_page_ex_demoname_1', true );
 ```
 
+**Step 4.** Configuration:
+
+Modify the `$directory` variable in `init.php` to your own directory.
+
+
+
 
 
 ## Updates
 
-##### = 1.0.0  (September 18, 2019) =
+##### = 1.3.0  (September 18, 2019) =
 
 * Tweak: MCEEditor upgrade in form component.
 * Tweak: Upgrade Fontawesome to 5.0+.
