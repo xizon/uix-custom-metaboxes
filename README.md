@@ -350,9 +350,45 @@ Modify the `$directory` variable in `init.php` to your own directory.
 
 
 
+**Step 5.** ( Optional ) Added filter for current Custom Metaboxes. Add the following code to your theme or plugin:
+
+```sh
+if ( !function_exists( 'mytheme_modify_vars' ) ) {
+    add_filter( 'uix_custom_metaboxes_vars', 'mytheme_modify_vars' );
+    function mytheme_modify_vars() {
+
+        $all_config = array();
+        $config  = array(
+
+                //-- Settings 1
+                array(
+                    'config' => array( ... )
+                ),
+
+               //-- Settings 2
+                array(
+                    'config' => array( ... )
+                ),
+
+            );
+
+        array_push( $all_config, $config );
+
+        return $all_config;
+
+    } 
+}
+```
+
 
 
 ## Updates
+
+
+##### = 1.3.1  (September 24, 2019) =
+
+* Dev: Added filter `add_filter( 'uix_custom_metaboxes_vars', 'mytheme_modify_vars' );` for current Custom Metaboxes.
+
 
 ##### = 1.3.0  (September 18, 2019) =
 
