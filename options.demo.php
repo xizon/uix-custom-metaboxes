@@ -11,7 +11,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 			'config' => array( 
 				'id'         =>  'yourtheme_metaboxes-1', 
 				'title'      =>  esc_html__( '[Demo] Normal Fields', 'your-theme' ),
-				'screen'     =>  'page', 
+				'screen'     =>  'page', // page, post, uix_products, uix-slideshow, ...
 				'context'    =>  'normal',
 				'priority'   =>  'high',
 				'fields' => array( 
@@ -241,7 +241,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 			'config' => array( 
 				'id'         =>  'yourtheme_metaboxes-2', 
 				'title'      =>  esc_html__( '[Demo] Appearance Fields', 'your-theme' ),
-				'screen'     =>  'page',
+				'screen'     =>  'page', // page, post, uix_products, uix-slideshow, ...
 				'context'    =>  'normal',
 				'priority'   =>  'high',
 				'fields' => array( 
@@ -266,7 +266,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						'title'    =>  esc_html__( 'Editor', 'your-theme' ),
 						'options'     =>  array( 
 											'editor_height'   => 200,
-											'editor_toolbar'  => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_link uix_unlink | removeformat outdent indent superscript subscript hr uix_image uix_highlightcode media customCode fullscreen'
+											'editor_toolbar'  => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media customCode fullscreen'
 										  )
 					),
 					array(
@@ -315,9 +315,9 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                                                 'label_upbtn_remove'  => esc_html__( 'Remove', 'your-theme' ),
                                                 'label_upbtn_add'     => esc_html__( 'Add New', 'your-theme' ),
                                                 'editor_height_teeny' => 50,
-                                                'editor_toolbar_teeny'=> 'formatselect forecolor backcolor bold italic underline strikethrough alignleft aligncenter alignright uix_link uix_unlink removeformat customCode',
+                                                'editor_toolbar_teeny'=> 'formatselect forecolor backcolor bold italic underline strikethrough alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink removeformat customCode',
                                                 'editor_height'       => 450,
-                                                'editor_toolbar'      => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_link uix_unlink | removeformat outdent indent superscript subscript hr uix_image uix_highlightcode media customCode fullscreen'
+                                                'editor_toolbar'      => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media customCode fullscreen'
 										  )
 
 
@@ -344,7 +344,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                                                 'label_upbtn_add_file' => esc_html__( 'Add Files', 'your-theme' ),
                                                 'label_upbtn_add_html' => esc_html__( 'Add Text', 'your-theme' ),
                                                 'editor_height'        => 300,
-                                                'editor_toolbar'       => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_link uix_unlink | removeformat outdent indent superscript subscript hr uix_image uix_highlightcode media customCode fullscreen'
+                                                'editor_toolbar'       => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media customCode fullscreen'
                                           )
 
 
