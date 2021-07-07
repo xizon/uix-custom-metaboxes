@@ -26,7 +26,6 @@ if ( !class_exists( 'Uix_Cmb_UploadMedia' ) ) {
 			wp_enqueue_media();
             
             
-            
             //check file type
             $is_video = false;
             $file_type = pathinfo( $value,PATHINFO_EXTENSION );
@@ -38,7 +37,7 @@ if ( !class_exists( 'Uix_Cmb_UploadMedia' ) ) {
                 $file_type == 'mpg'
             ) {
                 $is_video = true;
-            } 
+            }  
             
 	
 			$code =  '

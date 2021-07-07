@@ -26,6 +26,8 @@ Provides a compatible solution for some personalized themes that require custom 
 - WP 5.3.*
 - WP 5.4.*
 - WP 5.5.*
+- WP 5.6.*
+- WP 5.7.*
 
 
 ## Usage
@@ -165,8 +167,8 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 										  )
 
 					),
-					
-					
+
+
 					array(
 						'id'            =>  'cus_page_ex_demoname_s6',
 						'type'          =>  'radio',
@@ -191,6 +193,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 										  )
 
 					),
+
 
 
 					array(
@@ -304,7 +307,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						'title'    =>  esc_html__( 'Editor', 'your-theme' ),
 						'options'     =>  array( 
 											'editor_height'   => 200,
-											'editor_toolbar'  => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media customCode fullscreen'
+											'editor_toolbar'  => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media uix_cmb_customcode fullscreen'
 										  )
 					),
 					array(
@@ -339,23 +342,22 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                     
                     
 					array(
-						'id'            =>  'uix_themeplugin_multicontent',
+						'id'            =>  'cus_page_ex_demoname_multicontent',
 						'type'          =>  'multi-content',
 						'title'         =>  esc_html__( 'Multiple Content Area', 'your-theme' ),
 						'options'       =>  array( 
                                                 'one_column'          => false, //Use only one column as a separate module
                                                 'label_title'         => esc_html__( 'Title', 'your-theme' ),
                                                 'label_value'         => esc_html__( 'Contnet', 'your-theme' ),
-                                                'label_id'            => esc_html__( 'Step ID', 'your-theme' ),
-                                                'label_subtitle'      => esc_html__( 'Subtitle', 'your-theme' ),
-                                                'label_level'         => esc_html__( 'Level', 'your-theme' ),
+                                                'label_desc'          => esc_html__( 'Description', 'your-theme' ),
+                                                'label_parent'        => esc_html__( 'Parent Category', 'your-theme' ),
                                                 'label_classname'     => esc_html__( 'Class Name', 'your-theme' ),
                                                 'label_upbtn_remove'  => esc_html__( 'Remove', 'your-theme' ),
                                                 'label_upbtn_add'     => esc_html__( 'Add New', 'your-theme' ),
                                                 'editor_height_teeny' => 50,
-                                                'editor_toolbar_teeny'=> 'formatselect forecolor backcolor bold italic underline strikethrough alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink removeformat customCode',
+                                                'editor_toolbar_teeny'=> 'formatselect forecolor backcolor bold italic underline strikethrough alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink removeformat uix_cmb_customcode',
                                                 'editor_height'       => 450,
-                                                'editor_toolbar'      => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media customCode fullscreen'
+                                                'editor_toolbar'      => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media uix_cmb_customcode fullscreen'
 										  )
 
 
@@ -363,7 +365,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 					),
 
                     array(
-                        'id'            =>  'uix_themeplugin_multiworks',
+                        'id'            =>  'cus_page_ex_demoname_multiworks',
                         'type'          =>  'multi-portfolio',
                         'title'         =>  '',
                         'options'       =>  array( 
@@ -382,7 +384,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                                                 'label_upbtn_add_file' => esc_html__( 'Add Files', 'your-theme' ),
                                                 'label_upbtn_add_html' => esc_html__( 'Add Text', 'your-theme' ),
                                                 'editor_height'        => 300,
-                                                'editor_toolbar'       => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media customCode fullscreen'
+                                                'editor_toolbar'       => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media uix_cmb_customcode fullscreen'
                                           )
 
 
@@ -456,9 +458,9 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
         foreach( $_data as $value ) {
         ?>
             <li>
-                <strong><?php echo esc_html( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'name' ] ) ); ?></strong>
+                <strong><?php echo esc_html( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'name' ] ) ); ?></strong>
                 <p>
-                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
+                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'value' ] ) ); ?>
                 </p>
             </li>
         <?php
@@ -474,61 +476,72 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 //@print: 
 
 
-    <?php
+	<div class="slide-wrapper">
+		<?php
 
-    $_data = json_decode( get_post_meta( get_the_ID(), 'uix_themeplugin_multicontent', true ), true );
+			$all_data = json_decode( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_multicontent', true ), true );
 
-    if ( is_array( $_data ) && sizeof( $_data ) > 0 ) {
-
-        //Parse JSON data from Editor
-        foreach( $_data as $index => $value ) {
-
-            if ( is_array( $value ) && sizeof( $value ) > 0 ) {
-
-                //level 1
-                ?>
-                <section class="slide <?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'classname' ] ) ); ?>" id="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'id' ] ) ); ?>" data-level="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'level' ] ) ); ?>">
-
-                    <h3><?php echo esc_html( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'name' ] ) ); ?></h3>
-                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'subtitle' ] ) ); ?>
-                    <hr>
-                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
+			//
+			$all_data_res = json_decode( $all_data[0]['all_data'], true ); 
+			$all_reverse_data_res = json_decode( $all_data[0]['all_reverse_data'], true ); // Reverse Order of Data
 
 
-                <?php   
-
-                //level 2
-                $level_2_content = $value[ 'content' ];
-                if ( is_array( $level_2_content ) && sizeof( $level_2_content ) > 0 ) {
-
-                    foreach( $level_2_content as $index => $value ) {
-                    ?>
-                        <div class="slide slide-child <?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'classname' ] ) ); ?>" id="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'id' ] ) ); ?>" data-level="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'level' ] ) ); ?>">
-
-                            <h3><?php echo esc_html( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'name' ] ) ); ?></h3>
-                            <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'subtitle' ] ) ); ?>
-                            <hr>
-                            <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
-
-                        </div>  
-
-                    <?php
-                    } 
-
-                }//endif $level_2_content
-
-            ?>
-            </section>     
-            <?php
-
-            }//endif $value
+			//
+			$_data = $all_data_res; 
 
 
-        }//end foreach   
+			if ( is_array( $_data ) && sizeof( $_data ) > 0 ) {
 
-    }    
+				//Parse JSON data from Editor
+				foreach( $_data as $index => $value ) {
 
-    ?>     
+
+					if ( is_array( $value ) && sizeof( $value ) > 0 ) {
+
+						//Parent Category
+						$parent = Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'parent' ] );
+
+						?>
+						<section class="slide <?php echo ( !empty($parent) ? 'slide-child' : ''); ?> <?php echo esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'classname' ] ) ); ?>" id="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'id' ] ) ); ?>" data-parent="<?php echo esc_attr( $parent ); ?>">
+
+							<h3><?php echo esc_html( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'name' ] ) ); ?></h3>
+							<?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::autospace_to_front_from_jsondata( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'desc' ] ) ) ); ?>
+							<hr>
+							<?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'value' ] ) ); ?>
+
+
+						</section> 
+
+
+
+					<?php
+
+					}//endif $value
+
+
+				}//end foreach   
+
+			}    
+
+
+		?>
+
+	</div>
+	<script>
+	//Move the child element to the previous element
+	jQuery( document ).ready( function() {
+		jQuery( '.slide' ).each( function()  {
+			const root = $( this );
+			const rootEl = root.attr( 'id' );
+			jQuery( '.slide' ).each( function()  {
+				if ( rootEl == $( this ).data( 'parent' ) ) jQuery( this ).appendTo( root );
+			});
+
+		});
+	});
+	</script>
+
+
 
 
 
@@ -540,7 +553,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
     <?php
     $lightbox_enable = NULL;
 
-    $_data = json_decode( get_post_meta( get_the_ID(), 'uix_themeplugin_multiworks', true ), true );
+    $_data = json_decode( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_multiworks', true ), true );
 
     if ( is_array( $_data ) && sizeof( $_data ) > 1 ) {
 
@@ -550,7 +563,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
                 //Exclude lightbox fields
                 if ( array_key_exists( 'lightbox', $value ) ) {
-                    $lightbox_enable = esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'lightbox' ] ) );
+                    $lightbox_enable = esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'lightbox' ] ) );
                     break;
                 }//endif array_key_exists( 'lightbox', $value )
             }//endif $value
@@ -565,17 +578,17 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                 if ( ! array_key_exists( 'lightbox', $value ) ) {
 
             ?>
-                <div class="uix-portfolio-type-<?php echo esc_attr( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'type' ] ) ); ?>">
+                <div class="uix-portfolio-type-<?php echo esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'type' ] ) ); ?>">
 
                     <?php
-                    $img_url = Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'filePath' ] );
+                    $img_url = Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'filePath' ] );
 
                     if ( !empty( $img_url ) ) {
                         echo '<img src="'.esc_url( $img_url ).'" alt="" '.( $lightbox_enable == 'on' ? 'class="lightbox"' : '' ).'>';
                     }
                     ?>
 
-                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_json_data_from_editor( $value[ 'value' ] ) ); ?>
+                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'value' ] ) ); ?>
 
                 </div>     
             <?php
@@ -638,7 +651,7 @@ if ( !function_exists( 'mytheme_uix_publish_page' ) ) {
     function mytheme_uix_publish_page() {
         $currentScreen = get_current_screen();
 
-        if ( $currentScreen->id == 'uix' ) {
+        if ( $currentScreen->id == 'custom-post-type' ) {
 
             //Hide editor
             $custom_css = "
@@ -649,7 +662,7 @@ if ( !function_exists( 'mytheme_uix_publish_page' ) ) {
 
 
             //Disable excerpt
-            remove_meta_box( 'postexcerpt', 'uix', 'normal' ); 
+            remove_meta_box( 'postexcerpt', 'custom-post-type', 'normal' ); 
 
         }
 
@@ -661,6 +674,15 @@ if ( !function_exists( 'mytheme_uix_publish_page' ) ) {
 
 
 ## Updates
+
+
+
+##### = 2.0 (July 5, 2021) =
+
+* Fix: Fixed the display and escaping problem of the code block in the editor.
+* Tweak: Performance optimization of dynamic forms (use virtual tree to update dom).
+
+
 
 ##### = 1.9 (December 8, 2020) =
 
@@ -727,5 +749,3 @@ if ( !function_exists( 'mytheme_uix_publish_page' ) ) {
 ## Licensing
 
 Licensed under the [MIT](https://opensource.org/licenses/MIT).
-
-
