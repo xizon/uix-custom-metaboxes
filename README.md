@@ -28,6 +28,9 @@ Provides a compatible solution for some personalized themes that require custom 
 - WP 5.5.*
 - WP 5.6.*
 - WP 5.7.*
+- WP 5.8.*
+- WP 5.9.*
+- WP 6.0.*
 
 
 ## Usage
