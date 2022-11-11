@@ -1,4 +1,4 @@
-# Uix Custom Meta Boxes
+# Uix Custom Meta Boxes ( For XXX and your Theme )
 
 Provides a compatible solution for some personalized themes that require custom meta boxes for WordPress.
 
@@ -28,9 +28,9 @@ Provides a compatible solution for some personalized themes that require custom 
 - WP 5.5.*
 - WP 5.6.*
 - WP 5.7.*
-- WP 5.8.*
-- WP 5.9.*
 - WP 6.0.*
+- WP 6.1.*
+
 
 
 ## Usage
@@ -46,7 +46,7 @@ require_once {your_directory}/uix-custom-metaboxes/init.php';
 **Step 2.** Use the following API to add a custom meta boxes.
 
 ```sh
-if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
+if ( class_exists( 'Uix_XXX_Custom_Metaboxes' ) ) {
 
 	$custom_metaboxes_page_vars = array(
 
@@ -310,14 +310,14 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 						'title'    =>  esc_html__( 'Editor', 'your-theme' ),
 						'options'     =>  array( 
 											'editor_height'   => 200,
-											'editor_toolbar'  => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media uix_cmb_customcode fullscreen'
+											'editor_toolbar'  => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_xxx_cmb_link uix_xxx_cmb_unlink | removeformat outdent indent superscript subscript hr uix_xxx_cmb_image uix_xxx_cmb_highlightcode media uix_xxx_cmb_customcode fullscreen'
 										  )
 					),
 					array(
 						'id'            =>  'cus_page_ex_demoname_appear_4',
 						'type'          =>  'date',
 						'title'         =>  esc_html__( 'Date', 'your-theme' ),
-						'desc_primary'  =>  Uix_Custom_Metaboxes::kses( __( 'Enter date of your projects. <strong>(optional)</strong>', 'your-theme' ) ),
+						'desc_primary'  =>  Uix_XXX_Custom_Metaboxes::kses( __( 'Enter date of your projects. <strong>(optional)</strong>', 'your-theme' ) ),
 						'options'       =>  array( 
 											'format'  => 'MM dd, yy',
 										  )
@@ -358,9 +358,9 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                                                 'label_upbtn_remove'  => esc_html__( 'Remove', 'your-theme' ),
                                                 'label_upbtn_add'     => esc_html__( 'Add New', 'your-theme' ),
                                                 'editor_height_teeny' => 50,
-                                                'editor_toolbar_teeny'=> 'formatselect forecolor backcolor bold italic underline strikethrough alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink removeformat uix_cmb_customcode',
+                                                'editor_toolbar_teeny'=> 'formatselect forecolor backcolor bold italic underline strikethrough alignleft aligncenter alignright uix_xxx_cmb_link uix_xxx_cmb_unlink removeformat uix_xxx_cmb_customcode',
                                                 'editor_height'       => 450,
-                                                'editor_toolbar'      => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media uix_cmb_customcode fullscreen'
+                                                'editor_toolbar'      => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_xxx_cmb_link uix_xxx_cmb_unlink | removeformat outdent indent superscript subscript hr uix_xxx_cmb_image uix_xxx_cmb_highlightcode media uix_xxx_cmb_customcode fullscreen'
 										  )
 
 
@@ -387,7 +387,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                                                 'label_upbtn_add_file' => esc_html__( 'Add Files', 'your-theme' ),
                                                 'label_upbtn_add_html' => esc_html__( 'Add Text', 'your-theme' ),
                                                 'editor_height'        => 300,
-                                                'editor_toolbar'       => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_cmb_link uix_cmb_unlink | removeformat outdent indent superscript subscript hr uix_cmb_image uix_cmb_highlightcode media uix_cmb_customcode fullscreen'
+                                                'editor_toolbar'       => 'formatselect fontselect forecolor backcolor bold italic underline strikethrough bullist numlist blockquote code alignleft aligncenter alignright uix_xxx_cmb_link uix_xxx_cmb_unlink | removeformat outdent indent superscript subscript hr uix_xxx_cmb_image uix_xxx_cmb_highlightcode media uix_xxx_cmb_customcode fullscreen'
                                           )
 
 
@@ -401,7 +401,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 		),	
 	);
 
-	$custom_metaboxes_page = new Uix_Custom_Metaboxes( $custom_metaboxes_page_vars );
+	$custom_metaboxes_page = new Uix_XXX_Custom_Metaboxes( $custom_metaboxes_page_vars );
 }
 
 ```
@@ -416,7 +416,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 //--------------------------------------
 //@print: 
     <?php
-    echo Uix_Custom_Metaboxes::kses( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_appear_3', true ) );
+    echo Uix_XXX_Custom_Metaboxes::kses( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_appear_3', true ) );
     ?>
 
 //--------------------------------------
@@ -443,7 +443,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
             $_echo .= $value.', ';
         endforeach; 
     }
-    echo $_echo;  
+    echo esc_attr( $_echo );  
 
     ?>
 
@@ -454,16 +454,16 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
     <?php
 
-    $_data = json_decode( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_attrs', true ), true );
+    $_data = get_post_meta( get_the_ID(), 'cus_page_ex_demoname_attrs', true );
 
     if ( is_array( $_data ) && sizeof( $_data ) > 0 ) {
 
         foreach( $_data as $value ) {
         ?>
             <li>
-                <strong><?php echo esc_html( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'name' ] ) ); ?></strong>
+                <strong><?php echo esc_html( $value[ 'name' ] ); ?></strong>
                 <p>
-                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'value' ] ) ); ?>
+                    <?php echo Uix_XXX_Custom_Metaboxes::kses( $value[ 'value' ] ); ?>
                 </p>
             </li>
         <?php
@@ -482,11 +482,11 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 	<div class="slide-wrapper">
 		<?php
 
-			$all_data = json_decode( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_multicontent', true ), true );
+			$all_data = get_post_meta( get_the_ID(), 'cus_page_ex_demoname_multicontent', true );
 
 			//
-			$all_data_res = json_decode( $all_data[0]['all_data'], true ); 
-			$all_reverse_data_res = json_decode( $all_data[0]['all_reverse_data'], true ); // Reverse Order of Data
+			$all_data_res = is_array($all_data) ? json_decode( Uix_XXX_Custom_Metaboxes::format_json_str( $all_data[0]['all_data'] ), true ) : []; 
+			$all_reverse_data_res = is_array($all_data) ? json_decode( Uix_XXX_Custom_Metaboxes::format_json_str( $all_data[0]['all_reverse_data'] ), true ) : []; // Reverse Order of Data
 
 
 			//
@@ -502,15 +502,15 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 					if ( is_array( $value ) && sizeof( $value ) > 0 ) {
 
 						//Parent Category
-						$parent = Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'parent' ] );
+						$parent = $value[ 'parent' ];
 
 						?>
-						<section class="slide <?php echo ( !empty($parent) ? 'slide-child' : ''); ?> <?php echo esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'classname' ] ) ); ?>" id="<?php echo esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'id' ] ) ); ?>" data-parent="<?php echo esc_attr( $parent ); ?>">
+						<section class="slide <?php echo ( !empty($parent) ? 'slide-child' : ''); ?> <?php echo esc_attr( $value[ 'classname' ] ); ?>" id="<?php echo esc_attr( $value[ 'id' ] ); ?>" data-parent="<?php echo esc_attr( $parent ); ?>">
 
-							<h3><?php echo esc_html( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'name' ] ) ); ?></h3>
-							<?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::autospace_to_front_from_jsondata( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'desc' ] ) ) ); ?>
+							<h3><?php echo esc_html( $value[ 'name' ] ); ?></h3>
+							<?php echo Uix_XXX_Custom_Metaboxes::kses( $value[ 'desc' ] ); ?>
 							<hr>
-							<?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'value' ] ) ); ?>
+							<?php echo Uix_XXX_Custom_Metaboxes::kses( $value[ 'value' ] ); ?>
 
 
 						</section> 
@@ -556,7 +556,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
     <?php
     $lightbox_enable = NULL;
 
-    $_data = json_decode( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_multiworks', true ), true );
+    $_data = get_post_meta( get_the_ID(), 'cus_page_ex_demoname_multiworks', true );
 
     if ( is_array( $_data ) && sizeof( $_data ) > 1 ) {
 
@@ -566,7 +566,7 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
 
                 //Exclude lightbox fields
                 if ( array_key_exists( 'lightbox', $value ) ) {
-                    $lightbox_enable = esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'lightbox' ] ) );
+                    $lightbox_enable = esc_attr( $value[ 'lightbox' ] );
                     break;
                 }//endif array_key_exists( 'lightbox', $value )
             }//endif $value
@@ -581,17 +581,17 @@ if ( class_exists( 'Uix_Custom_Metaboxes' ) ) {
                 if ( ! array_key_exists( 'lightbox', $value ) ) {
 
             ?>
-                <div class="uix-portfolio-type-<?php echo esc_attr( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'type' ] ) ); ?>">
+                <div class="uix-portfolio-type-<?php echo esc_attr( $value[ 'type' ] ); ?>">
 
                     <?php
-                    $img_url = Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'filePath' ] );
+                    $img_url = $value[ 'filePath' ];
 
                     if ( !empty( $img_url ) ) {
                         echo '<img src="'.esc_url( $img_url ).'" alt="" '.( $lightbox_enable == 'on' ? 'class="lightbox"' : '' ).'>';
                     }
                     ?>
 
-                    <?php echo Uix_Custom_Metaboxes::kses( Uix_Custom_Metaboxes::parse_jsondata_from_editor( $value[ 'value' ] ) ); ?>
+                    <?php echo Uix_XXX_Custom_Metaboxes::kses( Uix_XXX_Custom_Metaboxes::format_json_str( $value[ 'value' ] ) ); ?>
 
                 </div>     
             <?php
@@ -679,6 +679,13 @@ if ( !function_exists( 'mytheme_uix_publish_page' ) ) {
 ## Updates
 
 
+##### = 2.2 (October 24, 2022) =
+
+* Fix: Fixed some form character escaping issues.
+* Tweak: Data Sanitized, Escaped, and Validated.
+* Tweak: Simplify the process of data storage.
+
+
 
 ##### = 2.0 (July 5, 2021) =
 
@@ -752,3 +759,4 @@ if ( !function_exists( 'mytheme_uix_publish_page' ) ) {
 ## Licensing
 
 Licensed under the [MIT](https://opensource.org/licenses/MIT).
+

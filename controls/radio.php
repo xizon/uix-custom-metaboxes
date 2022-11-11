@@ -3,23 +3,23 @@
 * Field Type: Radio & Radio Image
 *
 */
-class UixCmbFormType_Radio extends Uix_Custom_Metaboxes {
+class UixXXXCmbFormType_Radio extends Uix_XXX_Custom_Metaboxes {
 	
 	public static function add( $id = '', $title = '', $desc = '', $default = '', $options = '', $placeholder = '', $desc_primary = '', $enable_table = false ) {
 	?>
 		<?php if ( $enable_table ) : ?>
 		<tr>
-			<th class="uix-cmb__title">
+			<th class="uix-xxx-cmb__title">
 				<label><?php echo self::kses( $title ); ?></label>
 				<?php if ( !empty ( $desc ) ) { ?>
-					<p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
+					<p class="uix-xxx-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 				<?php } ?>
 			</th>
 			<td>
 		<?php endif; ?>     
 
 
-				  <div class="radio uix-cmb__radio-selector" data-target-id="<?php echo esc_attr( $id ); ?>">
+				  <div class="radio uix-xxx-cmb__radio-selector" data-target-id="<?php echo esc_attr( $id ); ?>">
 
 
 					<?php 
@@ -98,7 +98,7 @@ class UixCmbFormType_Radio extends Uix_Custom_Metaboxes {
 
 
 							<?php if ( $radio_type == 'normal' ) { ?>
-								<label data-value="<?php echo esc_attr( $key ); ?>" data-toggle-id="<?php echo esc_attr( $toggle_id ); ?>" class="<?php if ( $br ) { echo 'uix-cmb__label'; } else { echo ''; }; ?> uix-cmb__radio-text uix-cmb__toggle-selector <?php if ( $default == esc_attr( $key ) || empty( $default ) ) { echo 'active'; } else { echo ''; }; ?>"><input type="radio" name="<?php echo esc_attr( $id ); ?>_r" value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?>/><?php echo self::kses( $value ); ?></label>
+								<label data-value="<?php echo esc_attr( $key ); ?>" data-toggle-id="<?php echo esc_attr( $toggle_id ); ?>" class="<?php if ( $br ) { echo 'uix-xxx-cmb__label'; } else { echo ''; }; ?> uix-xxx-cmb__radio-text uix-xxx-cmb__toggle-selector <?php if ( $default == esc_attr( $key ) || empty( $default ) ) { echo 'active'; } else { echo ''; }; ?>"><input type="radio" name="<?php echo esc_attr( $id ); ?>_r" value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?>/><?php echo self::kses( $value ); ?></label>
 							<?php } ?>
 
 							<?php if ( $radio_type == 'image' ) { ?>
@@ -109,7 +109,7 @@ class UixCmbFormType_Radio extends Uix_Custom_Metaboxes {
 
 
 							<?php if ( $radio_type == 'switch' ) { ?>
-								<label data-value="<?php echo esc_attr( $key ); ?>" data-switch-ids="<?php echo esc_attr( $toggle_switch_id ); ?>" class="<?php if ( $br ) { echo 'uix-cmb__label'; } else { echo ''; }; ?> uix-cmb__radio-text uix-cmb__switch-radios <?php if ( $default == esc_attr( $key ) || empty( $default ) ) { echo 'active'; } else { echo ''; }; ?>"><input type="radio" name="<?php echo esc_attr( $id ); ?>_r" value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?>/><?php echo self::kses( $value ); ?></label>
+								<label data-value="<?php echo esc_attr( $key ); ?>" data-switch-ids="<?php echo esc_attr( $toggle_switch_id ); ?>" class="<?php if ( $br ) { echo 'uix-xxx-cmb__label'; } else { echo ''; }; ?> uix-xxx-cmb__radio-text uix-xxx-cmb__switch-radios <?php if ( $default == esc_attr( $key ) || empty( $default ) ) { echo 'active'; } else { echo ''; }; ?>"><input type="radio" name="<?php echo esc_attr( $id ); ?>_r" value="<?php echo esc_attr( $key ); ?>" <?php echo esc_html( $checked ); ?>/><?php echo self::kses( $value ); ?></label>
 							<?php } ?>	
 
 
@@ -170,87 +170,87 @@ class UixCmbFormType_Radio extends Uix_Custom_Metaboxes {
 							<!-- Associated controller -->
 							<?php if ( !empty( $toggle_id ) ) { ?>
 
-								<div class="uix-cmb__toggle-target" id="<?php echo esc_attr( $toggle_id ); ?>" style="display:none;" >
+								<div class="uix-xxx-cmb__toggle-target" id="<?php echo esc_attr( $toggle_id ); ?>" style="display:none;" >
 									<?php
 									//------
 									if ( $toggle_ipt_type == 'text' ) {
-										UixCmbFormType_Text::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Text::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}	
 
 									//------
 									if ( $toggle_ipt_type == 'textarea' ) {
-										UixCmbFormType_Textarea::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Textarea::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}	
 
 									//------
 									if ( $toggle_ipt_type == 'url' ) {
-										UixCmbFormType_Url::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Url::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}	
 
 									//------
 									if ( $toggle_ipt_type == 'number' ) {
-										UixCmbFormType_Number::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Number::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}				
 
 									//------
 									if ( $toggle_ipt_type == 'radio' ) {
-										UixCmbFormType_Radio::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Radio::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}			
 
 									//------
 									if ( $toggle_ipt_type == 'image' ) {
-										UixCmbFormType_Image::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Image::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}						
 
 									//------
 									if ( $toggle_ipt_type == 'color' ) {
-										UixCmbFormType_Color::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Color::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}				
 
 									//------
 									if ( $toggle_ipt_type == 'checkbox' ) {
-										UixCmbFormType_Checkbox::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Checkbox::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}		
 
 									//------
 									if ( $toggle_ipt_type == 'select' ) {
-										UixCmbFormType_Select::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Select::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}					
 
 									//------
 									if ( $toggle_ipt_type == 'editor' ) {
-										UixCmbFormType_Editor::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Editor::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}					
 
 									//------
 									if ( $toggle_ipt_type == 'date' ) {
-										UixCmbFormType_Date::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Date::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}				
 
 									//------
 									if ( $toggle_ipt_type == 'price' ) {
-										UixCmbFormType_Price::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_Price::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}		
 
 									//------
 									if ( $toggle_ipt_type == 'multi-checkbox' ) {
-										UixCmbFormType_MultiCheckbox::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_MultiCheckbox::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}	
 
 									//------
 									if ( $toggle_ipt_type == 'custom-attrs' ) {
-										UixCmbFormType_CustomAttrs::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_CustomAttrs::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}	
 
 
 									//------
 									if ( $toggle_ipt_type == 'multi-content' ) {
-										UixCmbFormType_MultiContent::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_MultiContent::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}	
 
 									//------
 									if ( $toggle_ipt_type == 'multi-portfolio' ) {
-										UixCmbFormType_MultiPortfolio::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
+										UixXXXCmbFormType_MultiPortfolio::add( $toggle_ipt_id, $toggle_ipt_title, $toggle_ipt_desc, $toggle_ipt_default, $toggle_ipt_options, $toggle_ipt_placeholder, $toggle_ipt_desc_primary, false );
 									}	                                                               
 
 									?>
@@ -276,7 +276,7 @@ class UixCmbFormType_Radio extends Uix_Custom_Metaboxes {
 
 
 					<?php if ( !empty ( $desc_primary ) ) { ?>
-						<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
+						<p class="uix-xxx-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 					<?php } ?>
 
 		<?php if ( $enable_table ) : ?> 

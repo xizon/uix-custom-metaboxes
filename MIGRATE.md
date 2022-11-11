@@ -7,71 +7,119 @@ These strings are used as naming prefixes for different WP plugins to prevent co
 -----
 
 
-### a) Migrate to Uix Shortcodes via `uix-custom-metaboxes`:
+### a) Migrate to Uix Shortcodes:
 
-Modify the README.md file:
+#### step 1) README.md file:
 
-- `# Uix Custom Meta Boxes`  -->  `# Uix Custom Meta Boxes ( For Uix Shortcodes and your Theme )`  
+- `# Uix Custom Meta Boxes ( For XXX and your Theme )`  -->  `# Uix Custom Meta Boxes ( For Uix Shortcodes and your Theme )`  
 
-Other files:
+
+#### step 2) Language Text Domain (Internationalization):
 
 - `your-theme`  -->  `uix-shortcodes`
-- `'/uix-custom-metaboxes/';`  -->  `UixShortcodes::plug_directory() .'includes/admin/uix-custom-metaboxes/';`
+
+
+#### step 3) File paths:
+
+- `'uix-custom-metaboxes/';`  -->  `UixShortcodes::plug_directory() .'includes/admin/uix-custom-metaboxes/';`
+
+
+#### step 4) Other files:
+
+- `Uix_XXX_Custom_Metaboxes`  -->  `Uix_Custom_Metaboxes`
+- `Uix_XXX_Cmb`  -->  `Uix_Cmb`
+- `UixXXXCustomMetaboxes`  -->  `UixCustomMetaboxes`
+- `UixXXXCmb`  -->  `UixCmb`
+- `uix_xxx_cmb`  -->  `uix_cmb`
+- `uix_xxx_custom_metaboxes`  -->  `uix_custom_metaboxes`
+- `uix-xxx-cmb`  -->  `uix-cmb`
+
+
+#### step 5) JS file function name:
+
+- `UixXXXGetRealIds`  -->  `UixGetRealIds`
+- `UixXXXGUIDCreate`  -->  `UixGUIDCreate`
+- `UixXXXToggle`  -->  `UixToggle`
+- `UixXXXEditor`  -->  `UixEditor`
+- `UixXXXMCE`  -->  `UixMCE`
 
 
 
 
-### b) Migrate to Uix Slideshow via `Uix Shortcodes -> uix-custom-metaboxes`:
+### b) Migrate to Uix Slideshow:
 
-Modify the README.md file:
+#### step 1) README.md file:
 
-- `# Uix Custom Meta Boxes ( For Uix Shortcodes and your Theme )`  -->  `# Uix Custom Meta Boxes ( For Uix Slideshow and your Theme )`  
-
-Other files:
-
-- `UixShortcodes`  -->  `UixSlideshow`
-- `Uix_Custom_Metaboxes`  -->  `Uix_Slideshow_Custom_Metaboxes`
-- `uix_custom_metaboxes`  -->  `uix_slideshow_custom_metaboxes`
-- `uix-cmb`  -->  `uix-slideshow-cmb`
-- `uix_cmb`  -->  `uix_slideshow_cmb`
-- `UixCmb`  -->  `UixSlideshowCmb`
-- `Uix_Cmb`  -->  `Uix_Slideshow_Cmb`
-- `UixCustomMetaboxes`  -->  `UixSlideshowCustomMetaboxes`
-- `UixGetRealIds`  -->  `UixSlideshowGetRealIds`
-- `UixGUIDCreate`  -->  `UixSlideshowGUIDCreate`
-- `UixToggle`  -->  `UixSlideshowToggle`
-- `UixEditor`  -->  `UixSlideshowEditor`
-- `UixMCE`  -->  `UixSlideshowMCE`
-- `uix-shortcodes`  -->  `uix-slideshow`
+- `# Uix Custom Meta Boxes ( For XXX and your Theme )`  -->  `# Uix Custom Meta Boxes ( For Uix Slideshow and your Theme )`  
 
 
+#### step 2) Language Text Domain (Internationalization):
+
+- `your-theme`  -->  `uix-shortcodes`
+
+
+#### step 3) File paths:
+
+- `'uix-custom-metaboxes/';`  -->  `UixSlideshow::plug_directory() .'includes/admin/uix-custom-metaboxes/';`
+
+
+#### step 4) Other files:
+
+- `Uix_XXX_Custom_Metaboxes`  -->  `Uix_Slideshow_Custom_Metaboxes`
+- `Uix_XXX_Cmb`  -->  `Uix_Slideshow_Cmb`
+- `UixXXXCustomMetaboxes`  -->  `UixSlideshowCustomMetaboxes`
+- `UixXXXCmb`  -->  `UixSlideshowCmb`
+- `uix_xxx_cmb`  -->  `uix_slideshow_cmb`
+- `uix_xxx_custom_metaboxes`  -->  `uix_slideshow_custom_metaboxes`
+- `uix-xxx-cmb`  -->  `uix-slideshow-cmb`
+
+
+#### step 5) JS file function name:
+
+- `UixXXXGetRealIds`  -->  `UixSlideshowGetRealIds`
+- `UixXXXGUIDCreate`  -->  `UixSlideshowGUIDCreate`
+- `UixXXXToggle`  -->  `UixSlideshowToggle`
+- `UixXXXEditor`  -->  `UixSlideshowEditor`
+- `UixXXXMCE`  -->  `UixSlideshowMCE`
 
 
 
-### c) Migrate to Uix Products via `Uix Shortcodes -> uix-custom-metaboxes`:
 
-Modify the README.md file:
+### c) Migrate to Uix Products:
 
-- `# Uix Custom Meta Boxes ( For Uix Shortcodes and your Theme )`  -->  `# Uix Custom Meta Boxes ( For Uix Products and your Theme )` 
+#### step 1) README.md file:
 
-Other files:
-
-- `UixShortcodes`  -->  `UixProducts`
-- `Uix_Custom_Metaboxes`  -->  `Uix_Products_Custom_Metaboxes`
-- `uix_custom_metaboxes`  -->  `uix_products_custom_metaboxes`
-- `uix-cmb`  -->  `uix-products-cmb`
-- `uix_cmb`  -->  `uix_products_cmb`
-- `UixCmb`  -->  `UixProductsCmb`
-- `Uix_Cmb`  -->  `Uix_Products_Cmb`
-- `UixCustomMetaboxes`  -->  `UixProductsCustomMetaboxes`
-- `UixGetRealIds`  -->  `UixProductsGetRealIds`
-- `UixGUIDCreate`  -->  `UixProductsGUIDCreate`
-- `UixToggle`  -->  `UixProductsToggle`
-- `UixEditor`  -->  `UixProductsEditor`
-- `UixMCE`  -->  `UixProductsMCE`
-- `uix-shortcodes`  -->  `uix-products`
+- `# Uix Custom Meta Boxes ( For XXX and your Theme )`  -->  `# Uix Custom Meta Boxes ( For Uix Products and your Theme )`  
 
 
+#### step 2) Language Text Domain (Internationalization):
+
+- `your-theme`  -->  `uix-products`
+
+
+#### step 3) File paths:
+
+- `'uix-custom-metaboxes/';`  -->  `UixProducts::plug_directory() .'includes/admin/uix-custom-metaboxes/';`
+
+
+#### step 4) Other files:
+
+- `Uix_XXX_Custom_Metaboxes`  -->  `Uix_Products_Custom_Metaboxes`
+- `Uix_XXX_Cmb`  -->  `Uix_Products_Cmb`
+- `UixXXXCustomMetaboxes`  -->  `UixProductsCustomMetaboxes`
+- `UixXXXCmb`  -->  `UixProductsCmb`
+- `uix_xxx_cmb`  -->  `uix_products_cmb`
+- `uix_xxx_custom_metaboxes`  -->  `uix_products_custom_metaboxes`
+- `uix-xxx-cmb`  -->  `uix-products-cmb`
+
+
+#### step 5) JS file function name:
+
+- `UixXXXGetRealIds`  -->  `UixProductsGetRealIds`
+- `UixXXXGUIDCreate`  -->  `UixProductsGUIDCreate`
+- `UixXXXToggle`  -->  `UixProductsToggle`
+- `UixXXXEditor`  -->  `UixProductsEditor`
+- `UixXXXMCE`  -->  `UixProductsMCE`
 
 
 

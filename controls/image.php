@@ -3,7 +3,7 @@
 * Field Type: Image
 *
 */
-class UixCmbFormType_Image extends Uix_Custom_Metaboxes {
+class UixXXXCmbFormType_Image extends Uix_XXX_Custom_Metaboxes {
 	
 	public static function add( $id = '', $title = '', $desc = '', $default = '', $options = '', $placeholder = '', $desc_primary = '', $enable_table = false ) {
 
@@ -21,18 +21,18 @@ class UixCmbFormType_Image extends Uix_Custom_Metaboxes {
 	?>
 		<?php if ( $enable_table ) : ?>
 		<tr>
-			<th class="uix-cmb__title">
+			<th class="uix-xxx-cmb__title">
 				<label><?php echo self::kses( $title ); ?></label>
 				<?php if ( !empty ( $desc ) ) { ?>
-					<p class="uix-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
+					<p class="uix-xxx-cmb__title_desc"><?php echo self::kses( $desc ); ?></p>
 				<?php } ?>
 			</th>
 			<td>
 		<?php endif; ?>   
 
-					<div class="uix-cmb__upload-wrapper">
+					<div class="uix-xxx-cmb__upload-wrapper">
 						<?php
-						Uix_Cmb_UploadMedia::add( array(
+						Uix_XXX_Cmb_UploadMedia::add( array(
 							'title'          => '',
 							'id'             => esc_attr( $id ),
 							'name'           => esc_attr( $id ),
@@ -46,7 +46,7 @@ class UixCmbFormType_Image extends Uix_Custom_Metaboxes {
 
 
 					<?php if ( !empty ( $desc_primary ) ) { ?>
-						<p class="uix-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
+						<p class="uix-xxx-cmb__description"><?php echo self::kses( $desc_primary ); ?></p>
 					<?php } ?>
 
 		<?php if ( $enable_table ) : ?>   
