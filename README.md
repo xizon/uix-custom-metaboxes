@@ -317,7 +317,7 @@ if ( class_exists( 'Uix_XXX_Custom_Metaboxes' ) ) {
 						'id'            =>  'cus_page_ex_demoname_appear_4',
 						'type'          =>  'date',
 						'title'         =>  esc_html__( 'Date', 'your-theme' ),
-						'desc_primary'  =>  Uix_XXX_Custom_Metaboxes::kses( __( 'Enter date of your projects. <strong>(optional)</strong>', 'your-theme' ) ),
+						'desc_primary'  =>  wp_kses_post( __( 'Enter date of your projects. <strong>(optional)</strong>', 'your-theme' ) ),
 						'options'       =>  array( 
 											'format'  => 'MM dd, yy',
 										  )
@@ -416,7 +416,7 @@ if ( class_exists( 'Uix_XXX_Custom_Metaboxes' ) ) {
 //--------------------------------------
 //@print: 
     <?php
-    echo Uix_XXX_Custom_Metaboxes::kses( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_appear_3', true ) );
+    echo wp_kses_post( get_post_meta( get_the_ID(), 'cus_page_ex_demoname_appear_3', true ) );
     ?>
 
 //--------------------------------------
@@ -463,7 +463,7 @@ if ( class_exists( 'Uix_XXX_Custom_Metaboxes' ) ) {
             <li>
                 <strong><?php echo esc_html( $value[ 'name' ] ); ?></strong>
                 <p>
-                    <?php echo Uix_XXX_Custom_Metaboxes::kses( $value[ 'value' ] ); ?>
+                    <?php echo wp_kses_post( $value[ 'value' ] ); ?>
                 </p>
             </li>
         <?php
@@ -508,9 +508,9 @@ if ( class_exists( 'Uix_XXX_Custom_Metaboxes' ) ) {
 						<section class="slide <?php echo ( !empty($parent) ? 'slide-child' : ''); ?> <?php echo esc_attr( $value[ 'classname' ] ); ?>" id="<?php echo esc_attr( $value[ 'id' ] ); ?>" data-parent="<?php echo esc_attr( $parent ); ?>">
 
 							<h3><?php echo esc_html( $value[ 'name' ] ); ?></h3>
-							<?php echo Uix_XXX_Custom_Metaboxes::kses( $value[ 'desc' ] ); ?>
+							<?php echo wp_kses_post( $value[ 'desc' ] ); ?>
 							<hr>
-							<?php echo Uix_XXX_Custom_Metaboxes::kses( $value[ 'value' ] ); ?>
+							<?php echo wp_kses_post( $value[ 'value' ] ); ?>
 
 
 						</section> 
@@ -591,7 +591,7 @@ if ( class_exists( 'Uix_XXX_Custom_Metaboxes' ) ) {
                     }
                     ?>
 
-                    <?php echo Uix_XXX_Custom_Metaboxes::kses( Uix_XXX_Custom_Metaboxes::format_json_str( $value[ 'value' ] ) ); ?>
+                    <?php echo wp_kses_post( Uix_XXX_Custom_Metaboxes::format_json_str( $value[ 'value' ] ) ); ?>
 
                 </div>     
             <?php
