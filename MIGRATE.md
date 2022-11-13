@@ -55,7 +55,7 @@ These strings are used as naming prefixes for different WP plugins to prevent co
 
 #### step 2) Language Text Domain (Internationalization):
 
-- `your-theme`  -->  `uix-shortcodes`
+- `your-theme`  -->  `uix-slideshow`
 
 
 #### step 3) File paths:

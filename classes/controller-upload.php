@@ -55,7 +55,7 @@ if ( !class_exists( 'Uix_XXX_Cmb_UploadMedia' ) ) {
 			'.PHP_EOL;
             
             if ( $echo ) {
-                echo wp_kses_post( $code );
+                echo htmlspecialchars_decode( esc_html( $code ) );
             } else {
                 return $code;
             }
